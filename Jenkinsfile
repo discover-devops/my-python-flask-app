@@ -22,38 +22,32 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            agent {
-                docker {
-                    image 'python:3.8'
-                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
-                }
-            }
             steps {
-                sh 'pip install -r requirements.txt'
+                script {
+                    docker.image('python:3.8').inside {
+                        sh 'pip install -r requirements.txt'
+                    }
+                }
             }
         }
 
         stage('Code Linting') {
-            agent {
-                docker {
-                    image 'python:3.8'
-                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
-                }
-            }
             steps {
-                sh 'flake8 .'
+                script {
+                    docker.image('python:3.8').inside {
+                        sh 'flake8 .'
+                    }
+                }
             }
         }
 
         stage('Run Tests') {
-            agent {
-                docker {
-                    image 'python:3.8'
-                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
-                }
-            }
             steps {
-                sh 'pytest --junitxml=reports/test-results.xml'
+                script {
+                    docker.image('python:3.8').inside {
+                        sh 'pytest --junitxml=reports/test-results.xml'
+                    }
+                }
             }
         }
 
