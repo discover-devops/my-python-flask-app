@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061d'
+        GIT_CREDENTIALS_ID = 'f8c39095-988e-43a6-83a4-56e2ca26f6c7'
         DOCKER_CREDENTIALS_ID = '09c0a441-cd75-47c3-ab5e-7bd95379329d'
         DOCKER_IMAGE = 'discoverdevops/my-python-flask-app'
     }
