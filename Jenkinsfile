@@ -1,13 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.8'
-            args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
-        }
-    }
+    agent any
 
     environment {
-        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061de'
+        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061d'
         DOCKER_CREDENTIALS_ID = '09c0a441-cd75-47c3-ab5e-7bd95379329d'
         DOCKER_IMAGE = 'discoverdevops/my-python-flask-app'
     }
@@ -27,18 +22,36 @@ pipeline {
         }
 
         stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'python:3.8'
+                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
+                }
+            }
             steps {
                 sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Code Linting') {
+            agent {
+                docker {
+                    image 'python:3.8'
+                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
+                }
+            }
             steps {
                 sh 'flake8 .'
             }
         }
 
         stage('Run Tests') {
+            agent {
+                docker {
+                    image 'python:3.8'
+                    args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
+                }
+            }
             steps {
                 sh 'pytest --junitxml=reports/test-results.xml'
             }
