@@ -1,10 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.8'
+            args '-v /var/lib/jenkins/workspace:/workspace' // Adjust as necessary for your Jenkins setup
+        }
+    }
 
     environment {
-        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061de' // Replace with your actual credentials ID
-        DOCKER_CREDENTIALS_ID = '09c0a441-cd75-47c3-ab5e-7bd95379329d' // Replace with your actual Docker Hub credentials ID
-        DOCKER_IMAGE = 'discoverdevops/my-python-flask-app' // Replace with your Docker Hub username and image name
+        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061de'
+        DOCKER_CREDENTIALS_ID = '09c0a441-cd75-47c3-ab5e-7bd95379329d'
+        DOCKER_IMAGE = 'discoverdevops/my-python-flask-app'
     }
 
     stages {
@@ -35,7 +40,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'pytest'
+                sh 'pytest --junitxml=reports/test-results.xml'
             }
         }
 
@@ -61,7 +66,7 @@ pipeline {
 
     post {
         always {
-            junit 'reports/*.xml'
+            junit 'reports/test-results.xml'
         }
         success {
             echo 'Build succeeded!'
