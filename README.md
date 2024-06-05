@@ -30,10 +30,3 @@ This project includes:
 - A Linux host for Jenkins and deployment
 - Docker Hub account
 
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/my-python-flask-app.git
-   cd my-python-flask-app
