@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDENTIALS_ID = '5db28b23-a2e3-4f94-8521-3222d78dafd6' // Replace with your actual credentials ID
-        DOCKER_CREDENTIALS_ID = '1541159d-cb4b-46b9-97c1-4e1ff271a42b' // Replace with your actual Docker Hub credentials ID
+        GIT_CREDENTIALS_ID = '45fb8e69-3b67-4f27-bc88-398f9df061de' // Replace with your actual credentials ID
+        DOCKER_CREDENTIALS_ID = '09c0a441-cd75-47c3-ab5e-7bd95379329d' // Replace with your actual Docker Hub credentials ID
         DOCKER_IMAGE = 'discoverdevops/my-python-flask-app' // Replace with your Docker Hub username and image name
     }
 
